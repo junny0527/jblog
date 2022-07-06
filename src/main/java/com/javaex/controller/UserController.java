@@ -69,7 +69,7 @@ public class UserController {
 	// 아이디 중복 체크
 	@ResponseBody
 	@RequestMapping(value ="/inCheck" , method = { RequestMethod.POST, RequestMethod.GET })
-	public int inCheck(@RequestParam("id") String id) {
+	public int idCheck(@RequestParam("id") String id) {
 
 		System.out.println("UserController > inCheck");
 		int count = userService.idCheck(id);
