@@ -3,20 +3,34 @@ package com.javaex.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.javaex.dao.BlogDao;
+import com.javaex.dao.CategoryDao;
+import com.javaex.dao.PostDao;
 import com.javaex.dao.UserDao;
+import com.javaex.vo.BlogVo;
+import com.javaex.vo.CategoryVo;
 import com.javaex.vo.UserVo;
 
 @Service
 public class UserService {
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private BlogDao blogDao;
+
 
 	// 회원가입 등록
 	public int joinInsert(UserVo userVo) {
 
 		System.out.println("UserService > joinInsert");
-		return userDao.joinInsert(userVo);
-
+		int count = userDao.joinInsert(userVo);
+		BlogVo blogVo = new BlogVo();
+		blogVo.setId(userVo.getId());
+		blogVo.setBlogTitle(userVo.getUserName()+"의 블로그다");
+		blogVo.setLogoFile("assets/images/spring-logo.jpg");
+		count += blogDao.insert(blogVo);
+		
+		return count;
 	}
 
 	// 로그인

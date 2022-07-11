@@ -82,7 +82,7 @@
 		$.ajax({
 			//-------보낼때
 			//요청할 컨트롤러 주소
-			url : "${pageContext.request.contextPath}/user/inCheck",
+			url : "${pageContext.request.contextPath}/user/idCheck",
 			//주소창이 변하지 않기 때문에 post,get 방식 모두 동일 
 			type : "post",
 			//contentType : "application/json",
