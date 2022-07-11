@@ -116,12 +116,14 @@
 	//----------------------------------------------------
 	/* 1-1) 리스트 화면 html */
 	function render(cateVo,updown, count){//cateList
+		console.log(cateVo);
+		console.log(updown);
 		console.log(count);
 		var str = '';
 		str += ' <tr id="t"> ';
 		str += ' 		<td>'+cateVo.cateNo+'</td> ';
 		str += ' 		<td>'+cateVo.cateName+'</td> ';
-		str += ' 		<td>'+ count +'</td> ';
+		str += ' 		<td>'+ cateVo.pcount +'</td> ';
 		str += ' 		<td>'+cateVo.description+'</td> ';
 		str += ' 		<td class="text-center"> ';
 		str += ' 			<img class="btnCateDel" data-cateno="'+cateVo.cateNo +'"src="${pageContext.request.contextPath}/assets/images/delete.jpg"> ';
@@ -184,29 +186,7 @@
 		
 	});
 	
-	//=================================================================
-	/* 3) 포스트 카운트 */
 	
-	function postCount(cateNo){
-		console.log("포스트카운트"+cateNo);
-		$.ajax({
-			url : url+"postCount",
-			type : "post",
-			contentType : "application/json",
-			data : JSON.stringify(cateNo),
-			dataType : "json",
-			success : function(postCount){
-			/*성공시 처리해야될 코드 작성*/
-				console.log(postCount);
-				return postCount;
-				
-			},
-			error : function(XHR, status, error) {
-			console.error(status + " : " + error);
-			}
-		});
-		return 0;
-	}
 	
 	
 </script>

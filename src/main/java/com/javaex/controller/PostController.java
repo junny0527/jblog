@@ -1,15 +1,18 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.javaex.service.BlogService;
 import com.javaex.service.CategoryService;
 import com.javaex.service.PostService;
 import com.javaex.vo.CategoryVo;
@@ -23,13 +26,16 @@ public class PostController {
 	private PostService postService;
 	@Autowired
 	private CategoryService categoryService;
-	
+	@Autowired
+	private BlogService blogService;
 	
 	// 포스트 폼
 	@RequestMapping(value="/admin/writeForm")
-	public String writeForm() {
-		
+	public String writeForm(@PathVariable(value = "id") String id, Model model) {
 		System.out.println("PostController > writeForm");
+		Map<String, Object> blogMap = blogService.getBlogVo(id);
+		model.addAttribute("blogMap", blogMap);
+		System.out.println("BlogMap:" + blogMap);
 		return "blog/admin/blog-admin-write";
 	}
 	

@@ -8,7 +8,7 @@
 		<![CDATA[
 		select	c.cateNo,
 				cateName,
-				pcount,
+				p.pcount,
 				description
 		from category c
 		left outer join

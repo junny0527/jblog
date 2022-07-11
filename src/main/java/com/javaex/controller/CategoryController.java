@@ -1,9 +1,11 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.javaex.service.BlogService;
 import com.javaex.service.CategoryService;
 import com.javaex.vo.CategoryVo;
 
@@ -21,12 +24,15 @@ public class CategoryController {
 	
 	@Autowired
 	private CategoryService categoryService;
-	
+	@Autowired
+	private BlogService blogService;
 	// 카테고리 메인 리스트
 	@RequestMapping(value="/admin/category")
-	public String categoryMain() {
-		
+	public String categoryMain(@PathVariable(value = "id") String id, Model model) {
 		System.out.println("CategoryController > categoryMain");
+		Map<String, Object> blogMap = blogService.getBlogVo(id);
+		model.addAttribute("blogMap", blogMap);
+		System.out.println("BlogMap:" + blogMap);
 		return "blog/admin/blog-admin-cate";
 	}
 	
