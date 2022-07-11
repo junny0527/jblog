@@ -23,6 +23,7 @@ public class CategoryService {
 		System.out.println("CategoryService > cateSelect");
 		return categoryDao.cateSelect(id);
 	}
+	
 
 	// 카테고리 등록+리턴
 	public CategoryVo cateInsert(CategoryVo categoryVo) {

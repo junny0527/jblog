@@ -13,15 +13,31 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.BlogDao;
+import com.javaex.dao.CategoryDao;
+import com.javaex.dao.PostDao;
 
 @Service
 public class BlogService {
 	
 	@Autowired
 	private BlogDao blogDao;
-	
+	@Autowired
+	private CategoryDao categoryDao;
+	@Autowired
+	private PostDao postDao;
 	String saveDir = "c:\\javaStudy\\jblogfile";
 	
+	// 블로그 정보 가져오기
+	public Map<String, Object> getBlog(String id,int cateNo) {
+	
+		
+		Map<String, Object> blogMap= new HashMap<String, Object>();
+		blogMap.put("BlogVo", blogDao.getBlogVo(id));
+		blogMap.put("cateList", categoryDao.cateSelect(id));
+		blogMap.put("postList", postDao.getList(cateNo));
+		System.out.println(cateNo);
+		return blogMap;
+	}
 	// 블로그 기본 정보(타이틀,로고)
 	public Map<String,Object> getBlogVo(String id) {
 		System.out.println("BlogService > getBlogVo");
@@ -29,6 +45,7 @@ public class BlogService {
 
 		return blogMap ;
 	}
+	
 	
 	// 내블로그 관리
 	public String basicUpdate(String blogTitle, MultipartFile file, String id) {

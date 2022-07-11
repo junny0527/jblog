@@ -34,11 +34,11 @@
 						</colgroup>
 			      		<tr>
 			      			<td><label for="textTitle">블로그 제목</label></td>
-			      			<td><input id="textTitle" type="text" name="blogTitle" value="${blogMap.BLOGTITLE}"></td>
+			      			<td><input id="textTitle" type="text" name="blogTitle" value="${BlogVo.BLOGTITLE}"></td>
 			      		</tr>
 			      		<tr>
 			      			<td><label>로고이미지</label></td>
-			      			<td class="text-left"><img src="${pageContext.request.contextPath}/${blogMap.LOGOFILE}"></td>   
+			      			<td class="text-left"><img src="${pageContext.request.contextPath}/${BlogVo.LOGOFILE}"></td>   
 			      		</tr>      		
 			      		<tr>
 			      			<td>&nbsp;</td>

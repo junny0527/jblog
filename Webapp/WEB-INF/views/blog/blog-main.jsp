@@ -23,12 +23,14 @@
 		<div id="content" class="clearfix">
 			<div id="profilecate_area">
 				<div id="profile">
-					
+
 					<!-- 사용자업로드 이미지 -->
 					<img id="proImg"
-						src="${pageContext.request.contextPath}/${blogMap.LOGOFILE}">
+						src="${pageContext.request.contextPath}/${blogMap.BlogVo.LOGOFILE}">
 
-					<div id="nick">이름:${blogMap.USERNAME}<br>아이디: ${blogMap.ID}님</div>
+					<div id="nick">
+						이름:${blogMap.BlogVo.USERNAME}<br>아이디: ${blogMap.BlogVo.ID}님
+					</div>
 				</div>
 				<div id="cate">
 					<div class="text-left">
@@ -36,9 +38,11 @@
 					</div>
 					<ul id="cateList" class="text-left">
 						<!-- for문 -->
-						<li><a href="$}">미분류</a></li>
-
+						<c:forEach items="${blogMap.cateList}" var="vo">
+							<li class="cateListClass" ><a href="${pageContext.request.contextPath}/${blogMap.BlogVo.ID}?cateNo=${vo.cateNo}">${vo.cateName}</a></li>
+						</c:forEach>
 					</ul>
+					
 				</div>
 			</div>
 			<!-- profilecate_area -->
@@ -46,28 +50,25 @@
 			<div id="post_area">
 
 				<div id="postBox" class="clearfix">
-					<div id="postTitle" class="text-left"><strong>08.페이징</strong></div>
-					<div id="postDate" class="text-left"><strong>2020/07/23</strong></div>
-					<div id="postNick">이름:${blogMap.USERNAME} <br>아이디:${blogMap.ID}님</div>
+					<div id="postTitle" class="text-left">
+						<strong>${blogMap.Postvo.POSTTITLE}</strong>
+					</div>
+					<div id="postDate" class="text-left">
+						<strong>${blogMap.Postvo.REGDATE}</strong>
+					</div>
+					<div id="postNick">
+						이름:${blogMap.BlogVo.USERNAME} <br>아이디:${blogMap.BlogVo.ID}님
+					</div>
 				</div>
 				<!-- //postBox -->
 
-				<div id="post">대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다. 대통령의
-					임기는 5년으로 하며, 중임할 수 없다. 법관은 탄핵 또는 금고 이상의 형의 선고에 의하지 아니하고는 파면되지 아니하며,
-					징계처분에 의하지 아니하고는 정직·감봉 기타 불리한 처분을 받지 아니한다.</div>
+				<div id="post">${blogMap.PostVo.POSTCONTENT}</div>
 				<!-- //post -->
 
 				<!-- 글이 없는 경우 -->
-				<!-- 
-				<div id="postBox" class="clearfix">
-							<div id="postTitle" class="text-left"><strong>등록된 글이 없습니다.</strong></div>
-							<div id="postDate" class="text-left"><strong></strong></div>
-							<div id="postNick"></div>
-				</div>
-			    
-				<div id="post" >
-				</div>
-				-->
+
+				
+
 
 				<div id="list">
 					<div id="listTitle" class="text-left">
@@ -80,30 +81,12 @@
 						</colgroup>
 
 						<!-- for문 -->
-						<tr>
-							<td class="text-left"><a href="">08.페이징</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">07.첨부파일_MultipartResolver</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">06.jquery_ajax</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">05.javaScript</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">04.spring_어플리케이션_아키텍쳐</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">등록된 글이 없습니다.</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
+						<c:forEach items="${blogMap.postList}" var="vo">
+							<tr>
+								<td class="text-left"><a href="">${vo.postTitle}</a></td>
+								<td class="text-right">${vo.regDate}</td>
+							</tr>
+						</c:forEach>
 						<!-- for문 -->
 
 					</table>
@@ -122,4 +105,5 @@
 	</div>
 	<!-- //wrap -->
 </body>
+
 </html>

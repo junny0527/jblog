@@ -53,7 +53,13 @@
 			where cateNo = #{cateNo}
 		]]>
 	</delete>
-
+	<select id="topCateNo" parameterType="com.javaex.vo.CategoryVo" resultType="int">
+		<![CDATA[
+			select		max(cateNo)
+			from        category
+			where       id= #{id}	
+		]]>
+	</select>
 	
 	
 

@@ -35,14 +35,24 @@ public class CategoryController {
 		System.out.println("BlogMap:" + blogMap);
 		return "blog/admin/blog-admin-cate";
 	}
+	// 카테고리 리스트 불러오기
 	
+		@ResponseBody
+		@RequestMapping(value="/list")
+		public List<CategoryVo> list(@PathVariable("id") String id,Model model) {
+			System.out.println("cateController>categoryList()");
+			Map<String, Object> blogMap = blogService.getBlogVo(id);
+			model.addAttribute("BlogVo", blogMap);
+			return categoryService.cateSelect(id);
+		}
 	// 카테고리 리스트 요청
 	@ResponseBody
 	@RequestMapping(value="/admin/cateList")
-	public List<CategoryVo> cateList(@PathVariable String id){
+	public List<CategoryVo> cateList(@PathVariable String id,Model model){
 		//cateNo 받기 + 포스트 수 가져오기 + 리스트 뿌리기
 		System.out.println("CategoryController > cateList");
 		List<CategoryVo> cateList = categoryService.cateSelect(id);
+		model.addAttribute("cateList", cateList);
 		System.out.println(cateList);
 
 		return cateList;

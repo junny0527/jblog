@@ -34,7 +34,7 @@ public class PostController {
 	public String writeForm(@PathVariable(value = "id") String id, Model model) {
 		System.out.println("PostController > writeForm");
 		Map<String, Object> blogMap = blogService.getBlogVo(id);
-		model.addAttribute("blogMap", blogMap);
+		model.addAttribute("BlogVo", blogMap);
 		System.out.println("BlogMap:" + blogMap);
 		return "blog/admin/blog-admin-write";
 	}
@@ -57,6 +57,16 @@ public class PostController {
 		
 		return "redirect:/{id}/admin/writeForm";
 		
+	}
+	@ResponseBody
+	@RequestMapping(value="/admin/postList")
+	public List<PostVo> postList(@PathVariable String id,Model model){
+		System.out.println("PostController > postList");
+		List<PostVo> postList = postService.postSelect(id);
+		model.addAttribute("postList", postList);
+		System.out.println(postList);
+
+		return postList;
 	}
 	
 	

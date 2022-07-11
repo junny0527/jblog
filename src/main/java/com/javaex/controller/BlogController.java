@@ -22,13 +22,13 @@ public class BlogController {
 	@Autowired
 	private BlogService blogService;
 
-	// 내블로그로 이동(블로그 타이틀,로고)
 	@RequestMapping(value="")
-	public String getBlog(@PathVariable(value = "id") String id, Model model) {
+	public String getBlog(@PathVariable(value = "id") String id,@RequestParam(value = "cateNo",required = false ,defaultValue = "0") int cateNo, Model model) {
 		System.out.println("BlogController > getBlog");
 		System.out.println(id);
-		Map<String, Object> blogMap = blogService.getBlogVo(id);
+		Map<String, Object> blogMap = blogService.getBlog(id,cateNo);
 		model.addAttribute("blogMap", blogMap);
+		model.addAttribute("BlogVo", blogMap.get("BlogVo"));
 		System.out.println("BlogMap:" + blogMap);
 
 		return "blog/blog-main";
@@ -59,7 +59,7 @@ public class BlogController {
 	@RequestMapping(value="/admin/basic")
 	public String adminBasic(@PathVariable(value = "id") String id, Model model) {
 		Map<String, Object> blogMap = blogService.getBlogVo(id);
-		model.addAttribute("blogMap", blogMap);
+		model.addAttribute("BlogVo", blogMap);
 		System.out.println("BlogController > adminBasic");
 		return "blog/admin/blog-admin-basic";
 	}

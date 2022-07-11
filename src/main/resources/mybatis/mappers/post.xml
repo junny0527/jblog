@@ -18,7 +18,19 @@
 			values(seq_post_no.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
 		]]>
 	</insert>
-
+<!-- 글 리스트 불러오기 -->
+	<select id="getList" parameterType="int" resultType="com.javaex.vo.PostVo">
+		<![CDATA[
+			select		postNo,
+         				c.cateNo cateNo,
+         				postTitle,
+         				to_char(p.regDate,'yyyy-mm-dd') regDate
+			from     	post p, category c
+			where    	p.cateNo= c.cateNo
+			and      	p.cateNo= #{cateNo}
+			order by 	postNo desc
+		]]>
+	</select>
 
 
 

@@ -26,6 +26,7 @@ public class CategoryDao {
 		return cateList;
 	}
 	
+	
 	// 카테고리 등록
 	public int cateInsert(CategoryVo categoryVo) {
 		
@@ -52,6 +53,9 @@ public class CategoryDao {
 		
 		return count;
 			
+	}
+	public int getTopCateNo(String id) {
+		return sqlSession.selectOne("category.topCateNo", id);
 	}
 
 }

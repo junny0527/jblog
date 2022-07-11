@@ -3,7 +3,7 @@
 
 		<div id="header" class="clearfix">
 		
-			<h1><a href="${pageContext.request.contextPath}/${blogMap.ID}">${blogMap.BLOGTITLE }</a></h1>
+			<h1><a href="${pageContext.request.contextPath}/${blogMap.BlogVo.ID}">${BlogVo.BLOGTITLE }</a></h1>
 			<ul class="clearfix">
 
 		 		<c:choose>
